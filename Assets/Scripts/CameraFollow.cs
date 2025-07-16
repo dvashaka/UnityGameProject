@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;      // The object to follow (e.g. Player)
-    public Vector3 offset;        // Offset from the target
-    public float smoothSpeed = 0.125f;
+    private Vector3 offset = new Vector3(0f, 0f, -10f);
+    private float smoothTime = 0.25f;
+    private Vector3 velocity = Vector3.zero;
 
-    void LateUpdate()
+    [SerializeField] private Transform target;
+
+    private void Update()
     {
-        if (target == null) return;
-
-        Vector3 desiredPosition = target.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = new Vector3(smoothedPosition.x, smoothedPosition.y, transform.position.z);
+        Vector3 targetPosition = target.position + offset;
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
     }
 }

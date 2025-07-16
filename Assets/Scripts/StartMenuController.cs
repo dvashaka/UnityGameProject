@@ -6,6 +6,11 @@ public class StartMenuController : MonoBehaviour
 
     public void OnStartClick()
     {
+        SceneManager.LoadScene("LeveLs");
+    }
+
+    public void OnLevel1Click()
+    {
         SceneManager.LoadScene("SampleScene");
     }
 
